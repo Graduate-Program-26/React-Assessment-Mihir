@@ -1,5 +1,13 @@
-export default function Page() {
+import { signIn, signOut } from "@/auth"
+import SignIn from "../ui/login/SignIn"
+
+export default function LoginPage() {
     return (
-        <h1>Login Page</h1>
+        <>
+            <main>
+                <h1>Login Page</h1>
+                <SignIn />
+            </main>
+        </>
     )
 }
