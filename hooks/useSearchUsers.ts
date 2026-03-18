@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
+import { searchUsers } from "@/app/lib/api/github";
 
 export function useSearchUsers(query: string) {
     return useQuery({
         queryKey: ["users", query],
-        queryFn: async () => {
-            const res = await fetch(`/api/search?q=${query}`);
-            if (!res.ok) throw new Error("Failed to fetch users");
-            return res.json();
-        },
+        queryFn: () => searchUsers(query),
         enabled: !!query,
         staleTime: 1000 * 60 * 5,
     });

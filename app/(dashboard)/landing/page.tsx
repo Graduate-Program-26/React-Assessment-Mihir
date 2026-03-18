@@ -1,11 +1,13 @@
+"use client";
+
 import { SearchBar } from "@/components/SearchBar";
 
 export default function Page() {
     return (
-        <main>
-            <div className="flex ml-4 w-full justify-self-center">
+        <main className="flex w-full min-h-screen">
+            <div className="flex-1 flex justify-center pt-8 px-4">
                 <SearchBar />
             </div>
         </main>
-    )
+    );
 }

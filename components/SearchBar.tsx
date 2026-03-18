@@ -6,6 +6,8 @@ import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useSearchUsers } from "@/hooks/useSearchUsers";
 import { useDebounce } from "@/hooks/useDebounce";
+import { UserGrid } from "./UserGrid";
+import { UserGridSkeleton } from "./UserGridSkeleton";
 
 export function SearchBar() {
     const [query, setQuery] = useState("");
@@ -25,19 +27,15 @@ export function SearchBar() {
                 <Button>Search</Button>
             </Field>
 
-            {isLoading && <p className="mt-2">Loading...</p>}
+            {isLoading && <UserGridSkeleton />}
 
             {isError && (
                 <p className="mt-2 text-red-500">
                     {(error as Error).message}
                 </p>
             )}
-            {/* for now just fetching and displaying users from search bar */}
-            {data && (
-                <pre className="mt-2 text-xs">
-                    {JSON.stringify(data.items?.slice(0, 3), null, 2)}
-                </pre>
-            )}
+
+            {!isLoading && data && <UserGrid users={data.items} />}
         </div>
     );
 }
