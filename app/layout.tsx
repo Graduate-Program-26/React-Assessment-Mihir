@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/app/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Sidebar } from "lucide-react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
