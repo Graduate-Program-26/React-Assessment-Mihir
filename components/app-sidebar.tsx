@@ -18,11 +18,24 @@ export function AppSidebar() {
             <SidebarHeader />
             <SidebarContent>
                 <SidebarGroup />
-
+                <SidebarGroupContent>
+                    <SidebarMenu>
+                        <SidebarMenuButton>
+                            <a href="/">
+                                <span>Landing Page</span>
+                            </a>
+                        </SidebarMenuButton>
+                        <SidebarMenuButton>
+                            <a href="/dashboard">
+                                <span>Dashboard</span>
+                            </a>
+                        </SidebarMenuButton>
+                    </SidebarMenu>
+                </SidebarGroupContent>
                 <SidebarGroup />
             </SidebarContent>
-            <SidebarFooter>
 
+            <SidebarFooter>
                 <SidebarGroupContent>
                     <SidebarMenu>
                         <SidebarMenuItem>
@@ -30,11 +43,6 @@ export function AppSidebar() {
                                 <ModeToggle />
                             </SidebarMenuButton>
                         </SidebarMenuItem>
-                    </SidebarMenu>
-                </SidebarGroupContent>
-
-                <SidebarGroupContent>
-                    <SidebarMenu>
                         <SidebarMenuItem>
                             <SidebarMenuButton asChild>
                                 <SignOut />
