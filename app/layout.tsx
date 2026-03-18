@@ -41,13 +41,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <SidebarProvider>
-              <AppSidebar />
-              <main>
-                <SidebarTrigger />
-                {children}
-              </main>
-            </SidebarProvider>
+            <main>
+              {children}
+            </main>
           </TooltipProvider>
         </ThemeProvider>
       </body>
