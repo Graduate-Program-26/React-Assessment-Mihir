@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sidebar"
 import { ModeToggle } from "./ModeToggle"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 export function AppSidebar() {
     return (
@@ -22,14 +23,14 @@ export function AppSidebar() {
                 <SidebarGroupContent>
                     <SidebarMenu>
                         <Button variant="outline" type="submit" className="w-11/12 self-center">
-                            <a href="/">
+                            <Link href="/">
                                 <span>Landing Page</span>
-                            </a>
+                            </Link>
                         </Button>
                         <Button variant="outline" type="submit" className="w-11/12 self-center">
-                            <a href="/dashboard">
+                            <Link href="/dashboard">
                                 <span>Dashboard</span>
-                            </a>
+                            </Link>
                         </Button>
                     </SidebarMenu>
                 </SidebarGroupContent>

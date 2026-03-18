@@ -9,9 +9,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 
 export function SearchBar() {
     const [query, setQuery] = useState("");
-
     const debouncedQuery = useDebounce(query, 500);
-
     const { data, isLoading, isError, error } = useSearchUsers(debouncedQuery);
 
     return (
