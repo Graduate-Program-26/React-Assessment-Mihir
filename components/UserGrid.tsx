@@ -11,11 +11,11 @@ export function UserGrid({ users }: UserGridProps) {
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 mt-4">
             {users.map((user) => (
-                <Link
-                    href={`/users/${user.login}`}
-                    className="font-medium hover:underline"
-                >
-                    <Card key={user.id} className="hover:shadow-lg transition-shadow">
+                <Card key={user.id} className="hover:shadow-lg transition-shadow">
+                    <Link
+                        href={`/users/${user.login}`}
+                        className="font-medium hover:underline"
+                    >
                         <CardHeader className="flex justify-center">
                             <div className="relative w-24 h-24">
                                 <Image
@@ -29,9 +29,10 @@ export function UserGrid({ users }: UserGridProps) {
                         <CardContent className="text-center">
                             {user.login}
                         </CardContent>
-                    </Card>
-                </Link>
-            ))}
-        </div>
+                    </Link>
+                </Card>
+            ))
+            }
+        </div >
     );
 }
