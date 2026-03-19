@@ -1,6 +1,7 @@
 import { RepoGrid } from "@/components/RepoGrid";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 
 interface PageProps {
     params: Promise<{
@@ -53,10 +54,12 @@ export default async function UserProfilePage({ params }: PageProps) {
                 </Link>
 
                 <div className="border rounded-xl p-6 shadow-sm text-center">
-                    <img
+                    <Image
                         src={user.avatar_url}
                         alt={user.login}
-                        className="w-32 h-32 rounded-full mx-auto"
+                        width={128}
+                        height={128}
+                        className="rounded-full mx-auto"
                     />
 
                     <h1 className="text-2xl font-bold mt-4">

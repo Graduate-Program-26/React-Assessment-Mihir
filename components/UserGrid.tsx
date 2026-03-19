@@ -21,8 +21,9 @@ export function UserGrid({ users }: UserGridProps) {
                                 <Image
                                     src={user.avatar_url}
                                     alt={user.login}
-                                    fill
-                                    className="rounded-full object-cover"
+                                    width={128}
+                                    height={128}
+                                    className="rounded-full mx-auto"
                                 />
                             </div>
                         </CardHeader>
