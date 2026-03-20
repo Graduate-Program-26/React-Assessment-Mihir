@@ -1,6 +1,7 @@
 import { RepoGrid } from "@/components/RepoGrid";
 import Image from "next/image";
 import { BackButton } from "@/components/BackButton";
+import { ActivityFeed } from "@/components/ActivityFeed";
 
 interface PageProps {
     params: Promise<{
@@ -19,16 +20,18 @@ export default async function UserProfilePage({ params }: PageProps) {
         Authorization: `token ${process.env.GITHUB_TOKEN}`,
     };
 
-    const [userRes, repoRes] = await Promise.all([
+    const [userRes, repoRes, activitiesRes] = await Promise.all([
         fetch(`https://api.github.com/users/${username}`, { headers, cache: "no-store" }),
         fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, { headers, cache: "no-store" }),
+        fetch(`https://api.github.com/users/${username}/events/public?per_page=10`, { headers, cache: "no-store" }),
     ]);
 
     if (!userRes.ok) return <div>User not found</div>;
 
-    const [user, repos] = await Promise.all([
+    const [user, repos, activities] = await Promise.all([
         userRes.json(),
-        repoRes.json()
+        repoRes.json(),
+        activitiesRes.json(),
     ]);
 
     return (
@@ -104,6 +107,10 @@ export default async function UserProfilePage({ params }: PageProps) {
                     </div>
                 </div>
 
+                <div>
+                    <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+                    <ActivityFeed activities={activities} />
+                </div>
             </div>
         </div>
     );
