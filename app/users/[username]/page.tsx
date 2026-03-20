@@ -1,7 +1,6 @@
 import { RepoGrid } from "@/components/RepoGrid";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import { BackButton } from "@/components/BackButton";
 
 interface PageProps {
     params: Promise<{
@@ -45,13 +44,7 @@ export default async function UserProfilePage({ params }: PageProps) {
         <div className="flex justify-center p-6">
             <div className="w-full max-w-2xl space-y-6">
 
-                <Link
-                    href="/landing"
-                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back
-                </Link>
+                <BackButton />
 
                 <div className="border rounded-xl p-6 shadow-sm text-center">
                     <Image
