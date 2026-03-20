@@ -15,30 +15,21 @@ export default async function UserProfilePage({ params }: PageProps) {
         return <div>Invalid user</div>;
     }
 
-    const res = await fetch(`https://api.github.com/users/${username}`, {
-        headers: {
-            Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        },
-        cache: "no-store",
-    });
+    const headers = {
+        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+    };
 
-    if (!res.ok) {
-        return <div>User not found</div>;
-    }
+    const [userRes, repoRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${username}`, { headers, cache: "no-store" }),
+        fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, { headers, cache: "no-store" }),
+    ]);
 
-    const user = await res.json();
+    if (!userRes.ok) return <div>User not found</div>;
 
-    const reposRes = await fetch(
-        `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`,
-        {
-            headers: {
-                Authorization: `token ${process.env.GITHUB_TOKEN}`,
-            },
-            cache: "no-store",
-        }
-    );
-
-    const repos = await reposRes.json();
+    const [user, repos] = await Promise.all([
+        userRes.json(),
+        repoRes.json()
+    ]);
 
     return (
         <div className="flex justify-center p-6">
