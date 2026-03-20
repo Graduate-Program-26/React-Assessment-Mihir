@@ -23,7 +23,7 @@ export function AppSidebar() {
                 <SidebarGroupContent>
                     <SidebarMenu>
                         <Button variant="outline" type="submit" className="w-11/12 self-center">
-                            <Link href="/">
+                            <Link href="/landing">
                                 <span>Landing Page</span>
                             </Link>
                         </Button>
