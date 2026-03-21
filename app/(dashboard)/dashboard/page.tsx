@@ -1,6 +1,5 @@
 import { RepoGrid } from "@/components/RepoGrid";
 import Image from "next/image";
-import { BackButton } from "@/components/BackButton";
 import { ActivityFeed } from "@/components/ActivityFeed";
 
 export default async function DashboardPage() {
