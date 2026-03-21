@@ -7,12 +7,14 @@ export const authConfig = {
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
-            const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-            if (isOnDashboard) {
-                if (isLoggedIn) return true;
-                return false;
-            } else if (isLoggedIn) {
-                return Response.redirect(new URL('/dashboard', nextUrl));
+            const isOnLanding = nextUrl.pathname.startsWith('/landing');
+            const isOnLogin = nextUrl.pathname.startsWith('/login');
+
+            if (isOnLanding) {
+                return isLoggedIn;
+            }
+            if (isOnLogin && isLoggedIn) {
+                return Response.redirect(new URL('/landing', nextUrl));
             }
             return true;
         },

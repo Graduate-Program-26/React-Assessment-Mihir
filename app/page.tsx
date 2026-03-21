@@ -1,9 +1,13 @@
-import SignIn from "./ui/login/SignIn";
+import { Suspense } from "react";
+import { SearchBar } from "@/components/SearchBar";
+import { SearchBarSkeleton } from "@/components/SearchBarSkeleton";
 
 export default function Home() {
   return (
-    <>
-      <h1>Landing Page</h1>
-    </>
+    <div className="flex flex-col items-center w-full pt-6">
+      <Suspense fallback={<SearchBarSkeleton />}>
+        <SearchBar />
+      </Suspense>
+    </div>
   );
 }
