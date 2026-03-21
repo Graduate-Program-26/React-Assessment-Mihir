@@ -4,22 +4,32 @@ import { BackButton } from "@/components/BackButton";
 import { ActivityFeed } from "@/components/ActivityFeed";
 
 export default async function DashboardPage() {
-    const username = "Mihir-Arjun-dvt";
-
     const headers = {
         Authorization: `token ${process.env.GITHUB_TOKEN}`,
     };
 
-    const [userRes, repoRes, activitiesRes] = await Promise.all([
-        fetch(`https://api.github.com/users/${username}`, { headers, cache: "no-store" }),
-        fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, { headers, cache: "no-store" }),
-        fetch(`https://api.github.com/users/${username}/events/public?per_page=10`, { headers, cache: "no-store" }),
+    const userRes = await fetch("https://api.github.com/user", {
+        headers,
+        cache: "no-store",
+    });
+
+    if (!userRes.ok) return <div>Failed to load user</div>;
+
+    const user = await userRes.json();
+    const username = user.login;
+
+    const [repoRes, activitiesRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, {
+            headers,
+            cache: "no-store",
+        }),
+        fetch(`https://api.github.com/users/${username}/events/public?per_page=10`, {
+            headers,
+            cache: "no-store",
+        }),
     ]);
 
-    if (!userRes.ok) return <div>User not found</div>;
-
-    const [user, repos, activities] = await Promise.all([
-        userRes.json(),
+    const [repos, activities] = await Promise.all([
         repoRes.json(),
         activitiesRes.json(),
     ]);
