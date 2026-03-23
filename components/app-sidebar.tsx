@@ -12,10 +12,11 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./ModeToggle";
-import { LayoutDashboard, Search } from "lucide-react";
+import { LayoutDashboard, Search, Star, GitFork, Users } from "lucide-react";
 import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 const navItems = [
     { label: "Search", href: "/landing", icon: Search },
@@ -29,6 +30,12 @@ interface GitHubUser {
     public_repos: number;
     followers: number;
     following: number;
+    public_gists: number;
+}
+
+interface GitHubRepo {
+    stargazers_count: number;
+    forks_count: number;
 }
 
 export async function AppSidebar() {
@@ -36,17 +43,40 @@ export async function AppSidebar() {
     const username = session?.user?.name;
 
     let githubUser: GitHubUser | null = null;
+    let totalStars = 0;
+    let totalForks = 0;
 
     if (username) {
-        const res = await fetch(`https://api.github.com/users/${username}`, {
-            headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
-            next: { revalidate: 3600 },
-        });
-        if (res.ok) githubUser = await res.json();
+        const [userRes, reposRes] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}`, {
+                headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
+                next: { revalidate: 3600 },
+            }),
+            fetch(`https://api.github.com/users/${username}/repos?per_page=100`, {
+                headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
+                next: { revalidate: 3600 },
+            }),
+        ]);
+
+        if (userRes.ok) githubUser = await userRes.json();
+        if (reposRes.ok) {
+            const repos: GitHubRepo[] = await reposRes.json();
+            totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
+            totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
+        }
     }
 
     return (
         <Sidebar>
+
+            <SidebarHeader className="px-4 py-5">
+                <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-md bg-500 border flex items-center justify-center">
+                        <span className="text-2xl font-bold"><FaGithub /></span>
+                    </div>
+                    <span className="font-semibold text-sm tracking-tight">Github Portfolios</span>
+                </div>
+            </SidebarHeader>
 
             <SidebarContent>
                 <SidebarGroup>
@@ -84,47 +114,58 @@ export async function AppSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-
             </SidebarContent>
 
-            <SidebarFooter>
-                <SidebarContent>
-                    {githubUser && (
-                        <div className="mx-3 mt-1 mb-2 p-3 rounded-lg border border-border bg-muted/40 space-y-3">
-                            <div className="flex items-center gap-3">
-                                <Image
-                                    src={githubUser.avatar_url}
-                                    alt={githubUser.login}
-                                    width={40}
-                                    height={40}
-                                    className="rounded-full ring-2"
-                                />
-                                <div className="min-w-0">
-                                    <p className="text-sm font-semibold truncate">
-                                        {githubUser.name || githubUser.login}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground truncate">
-                                        @{githubUser.login}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-3 divide-x divide-border text-center">
-                                {[
-                                    { label: "Repos", value: githubUser.public_repos },
-                                    { label: "Followers", value: githubUser.followers },
-                                    { label: "Following", value: githubUser.following },
-                                ].map(({ label, value }) => (
-                                    <div key={label} className="px-1">
-                                        <p className="text-xs font-semibold">{value}</p>
-                                        <p className="text-[10px] text-muted-foreground">{label}</p>
+            {githubUser && (
+                <SidebarGroup>
+                    <SidebarGroupLabel>My Stats</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border">
+                            {[
+                                { label: "Total Stars", value: totalStars, icon: Star },
+                                { label: "Total Forks", value: totalForks, icon: GitFork },
+                                { label: "Followers", value: githubUser.followers, icon: Users },
+                                { label: "Public Repos", value: githubUser.public_repos, icon: LayoutDashboard },
+                            ].map(({ label, value, icon: Icon }) => (
+                                <div key={label} className="flex items-center justify-between px-4 py-3.5">
+                                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                        <Icon className="w-4 h-4 shrink-0" />
+                                        <span>{label}</span>
                                     </div>
-                                ))}
-                            </div>
+                                    <span className="text-sm font-semibold">{value}</span>
+                                </div>
+                            ))}
                         </div>
-                    )}
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            )}
 
-                </SidebarContent>
-            </SidebarFooter>
+
+            {githubUser && (
+                <SidebarFooter className="p-3">
+                    <Link
+                        href={`/users/${githubUser.login}`}
+                        className="flex items-center gap-3 p-2 rounded-lg border border-border bg-muted/40 hover:bg-muted transition-colors"
+                    >
+                        <Image
+                            src={githubUser.avatar_url}
+                            alt={githubUser.login}
+                            width={36}
+                            height={36}
+                            className="rounded-full ring-2 shrink-0"
+                        />
+                        <div className="min-w-0">
+                            <p className="text-sm font-semibold truncate">
+                                {githubUser.name || githubUser.login}
+                            </p>
+                            <p className="text-xs text-muted-foreground truncate">
+                                @{githubUser.login}
+                            </p>
+                        </div>
+                    </Link>
+                </SidebarFooter>
+            )}
+
         </Sidebar>
     );
 }
