@@ -63,9 +63,11 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
     const hasActivity = activities.some((e) => parseActivity(e) !== null);
 
     if (!hasActivity) {
-        <p className="text-center text-sm text-muted-foreground">
-            No recent public activity
-        </p>
+        return (
+            <p className="text-center text-sm text-muted-foreground">
+                No recent public activity
+            </p>
+        );
     }
 
     return (
