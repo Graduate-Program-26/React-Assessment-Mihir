@@ -9,6 +9,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { BackButton } from "@/components/BackButton";
 
 interface PageProps {
     params: Promise<{
@@ -46,6 +47,7 @@ export default async function UserProfilePage({ params }: PageProps) {
             <div className="w-full max-w-2xl space-y-6">
 
                 <div className="flex items-center gap-3 px-4 py-2 rounded-lg border bg-muted/40">
+                    <BackButton />
                     <Breadcrumb>
                         <BreadcrumbList>
                             <BreadcrumbItem>

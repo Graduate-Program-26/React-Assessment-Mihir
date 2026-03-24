@@ -17,6 +17,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
+import { RecentSearches } from "./RecentSearches";
 
 const navItems = [
     { label: "Search", href: "/landing", icon: Search },
@@ -94,6 +95,13 @@ export async function AppSidebar() {
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+
+                <SidebarGroup>
+                    <SidebarGroupLabel>Recent Searches</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                        <RecentSearches />
                     </SidebarGroupContent>
                 </SidebarGroup>
 
