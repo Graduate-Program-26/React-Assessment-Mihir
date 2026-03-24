@@ -1,7 +1,14 @@
 import { RepoGrid } from "@/components/RepoGrid";
 import Image from "next/image";
-import { BackButton } from "@/components/BackButton";
 import { ActivityFeed } from "@/components/ActivityFeed";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 interface PageProps {
     params: Promise<{
@@ -38,7 +45,21 @@ export default async function UserProfilePage({ params }: PageProps) {
         <div className="flex justify-center p-6">
             <div className="w-full max-w-2xl space-y-6">
 
-                <BackButton />
+                <div className="flex items-center gap-3 px-4 py-2 rounded-lg border bg-muted/40">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href="/landing">
+                                    Search
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>{user.login}</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                </div>
 
                 <div className="border rounded-xl p-6 shadow-sm text-center">
                     <Image

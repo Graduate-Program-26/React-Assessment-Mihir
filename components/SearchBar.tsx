@@ -76,7 +76,7 @@ export function SearchBar() {
                     />
                     <p className="text-lg font-semibold text-foreground">No users found</p>
                     <p className="text-sm text-muted-foreground max-w-xs text-center">
-                        We couldn't find anyone matching <span className="font-medium text-foreground">&quot;{query}&quot;</span>. Try checking the spelling or searching for a different username.
+                        We couldn&#39;t find anyone matching <span className="font-medium text-foreground">&quot;{query}&quot;</span>. Try checking the spelling or searching for a different username.
                     </p>
                 </div>
             )}
