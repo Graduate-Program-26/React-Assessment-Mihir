@@ -82,22 +82,15 @@ export default async function UserProfilePage({ params }: PageProps) {
                         <p className="mt-3 text-sm">{user.bio}</p>
                     )}
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
+                    <div className="grid grid-cols-3 gap-4 mt-6">
                         <div className="text-center">
                             <p className="font-semibold">{user.public_repos}</p>
                             <p className="text-xs text-muted-foreground">Repos</p>
                         </div>
-
-                        <div className="text-center">
-                            <p className="font-semibold">{user.public_gists}</p>
-                            <p className="text-xs text-muted-foreground">Gists</p>
-                        </div>
-
                         <div className="text-center">
                             <p className="font-semibold">{user.followers}</p>
                             <p className="text-xs text-muted-foreground">Followers</p>
                         </div>
-
                         <div className="text-center">
                             <p className="font-semibold">{user.following}</p>
                             <p className="text-xs text-muted-foreground">Following</p>
