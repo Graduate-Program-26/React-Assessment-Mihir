@@ -26,7 +26,13 @@ function fmtStars(n: number) {
     return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
 }
 
-const CustomTooltip = ({ active, payload }: any) => {
+// Properly typed custom tooltip
+interface TooltipProps {
+    active?: boolean;
+    payload?: Array<{ payload: LanguageStat & { fill: string } }>;
+}
+
+const CustomTooltip = ({ active, payload }: TooltipProps) => {
     if (active && payload && payload.length) {
         const { language, stars } = payload[0].payload;
         return (

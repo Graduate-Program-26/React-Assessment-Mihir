@@ -1,6 +1,7 @@
 import { Star, GitFork, ExternalLink } from "lucide-react";
 import { LANGUAGE_COLORS, type TrendingRepo } from "@/hooks/useTrendingRepos";
 import Link from "next/link";
+import Image from "next/image";
 
 function fmt(n: number) {
     return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
@@ -16,30 +17,28 @@ export function FeedRepoCard({ repo }: { repo: TrendingRepo }) {
             rel="noopener noreferrer"
             className="group flex flex-col gap-3 rounded-xl border border-border bg-card p-5 hover:border-primary/50 hover:shadow-md transition-all duration-200"
         >
-            {/* Header */}
             < div className="flex items-start justify-between gap-2" >
                 <div className="flex items-center gap-2 min-w-0">
-                    <img
+                    <Image
                         src={repo.owner.avatar_url}
                         alt={repo.owner.login}
-                        className="w-5 h-5 rounded-full shrink-0"
+                        width={30}
+                        height={30}
+                        className="rounded-full shrink-0"
                     />
                     <span className="text-xs text-muted-foreground truncate">{repo.owner.login}</span>
                 </div>
                 <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
             </div >
 
-            {/* Repo name */}
             < p className="font-semibold text-sm text-foreground leading-snug" >
                 {repo.name}
             </p >
 
-            {/* Description */}
             < p className="text-xs text-muted-foreground line-clamp-2 flex-1 leading-relaxed" >
                 {repo.description ?? "No description provided."}
             </p >
 
-            {/* Topics */}
             {
                 repo.topics.length > 0 && (
                     <div className="flex flex-wrap gap-1">
@@ -52,7 +51,6 @@ export function FeedRepoCard({ repo }: { repo: TrendingRepo }) {
                 )
             }
 
-            {/* Footer */}
             <div className="flex items-center gap-3 mt-auto pt-2 border-t border-border text-xs text-muted-foreground">
                 {langColor && (
                     <span className="flex items-center gap-1.5">

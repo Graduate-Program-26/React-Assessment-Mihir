@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, ResponsiveContainer } from "recharts";
 import { Card } from "@/components/ui/card";
 import { LanguageStat } from "@/app/lib/trendingStats";
 
