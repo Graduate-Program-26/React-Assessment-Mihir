@@ -18,8 +18,10 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { RecentSearches } from "./RecentSearches";
+import { IoHomeOutline } from "react-icons/io5";
 
 const navItems = [
+    { label: "Feed", href: "/feed", icon: IoHomeOutline },
     { label: "Search", href: "/landing", icon: Search },
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
 ];
