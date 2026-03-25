@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTrendingRepos } from "@/hooks/useTrendingRepos";
 import { IoMdTrendingUp } from "react-icons/io";
 import RepoCard from "@/components/RepoCard";
+import RepoCardSkeleton from "@/components/RepoCardSkeleton";
 
 export default function FeedPage() {
     const [language, setLanguage] = useState("All"); // will use later for filtering
@@ -27,7 +28,10 @@ export default function FeedPage() {
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full max-w-7xl">
-                {data?.items.map((repo) => <RepoCard key={repo.id} repo={repo} />)}
+                {isLoading
+                    ? Array.from({ length: 24 }).map((_, i) => <RepoCardSkeleton key={i} />)
+                    : data?.items.map((repo) => <RepoCard key={repo.id} repo={repo} />)
+                }
             </div>
         </div>
     );
