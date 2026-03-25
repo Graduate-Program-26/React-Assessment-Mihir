@@ -58,15 +58,15 @@ export function SearchBar() {
                 </div>
             )}
 
-            {isLoading && <UserGridSkeleton />}
+            {query && isLoading && <UserGridSkeleton />}
 
-            {isError && (
+            {query && isError && (
                 <p className="text-red-500">
                     {(error as Error).message}
                 </p>
             )}
 
-            {!isLoading && data && data.items.length === 0 && (
+            {query && !isLoading && data && data.items.length === 0 && (
                 <div className="flex flex-col items-center gap-3 mt-6">
                     <Image
                         src="/illustrations/undraw_page-eaten_b2rt.svg"
@@ -81,7 +81,7 @@ export function SearchBar() {
                 </div>
             )}
 
-            {!isLoading && data && data.items.length > 0 && <UserGrid users={data.items} />}
+            {query && !isLoading && data && data.items.length > 0 && <UserGrid users={data.items} />}
         </div>
     );
 }
