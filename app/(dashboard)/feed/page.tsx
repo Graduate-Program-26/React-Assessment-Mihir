@@ -5,6 +5,30 @@ import { useTrendingRepos } from "@/hooks/useTrendingRepos";
 import { IoMdTrendingUp } from "react-icons/io";
 import RepoCard from "@/components/RepoCard";
 import RepoCardSkeleton from "@/components/RepoCardSkeleton";
+import { cn } from "@/app/lib/utils";
+
+const LANGUAGES = ["All", "TypeScript", "Python", "Rust", "Go", "JavaScript", "C++", "Zig", "Swift", "Kotlin"];
+const TIME_RANGES = [
+    { label: "Today", value: 1 },
+    { label: "This week", value: 7 },
+    { label: "This month", value: 30 },
+];
+
+function FilterPill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+    return (
+        <button
+            onClick={onClick}
+            className={cn(
+                "px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 border",
+                active
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-transparent text-muted-foreground border-border hover:border-primary/50 hover:text-foreground"
+            )}
+        >
+            {children}
+        </button>
+    );
+}
 
 export default function FeedPage() {
     const [language, setLanguage] = useState("All"); // will use later for filtering
@@ -19,8 +43,26 @@ export default function FeedPage() {
                     <h1 className="text-2xl font-bold tracking-tight">Trending Repositories</h1>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                    The most active open source projects right now
+                    The fastest-rising open source projects right now
                 </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-3 w-full max-w-3xl">
+                <div className="flex flex-wrap justify-center gap-1.5">
+                    {TIME_RANGES.map((r) => (
+                        <FilterPill key={r.value} active={since === r.value} onClick={() => setSince(r.value)}>
+                            {r.label}
+                        </FilterPill>
+                    ))}
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-1.5">
+                    {LANGUAGES.map((l) => (
+                        <FilterPill key={l} active={language === l} onClick={() => setLanguage(l)}>
+                            {l}
+                        </FilterPill>
+                    ))}
+                </div>
             </div>
 
             {isError && (
