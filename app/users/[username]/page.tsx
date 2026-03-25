@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { BackButton } from "@/components/BackButton";
 import { ContributionChart } from "@/components/ContributionChart";
+import NotFoundPage from "@/app/not-found";
 
 interface PageProps {
     params: Promise<{
@@ -35,7 +36,7 @@ export default async function UserProfilePage({ params }: PageProps) {
         fetch(`https://api.github.com/users/${username}/events/public?per_page=10`, { headers, cache: "no-store" }),
     ]);
 
-    if (!userRes.ok) return <div>User not found</div>;
+    if (!userRes.ok) return <NotFoundPage />;
 
     const [user, repos, activities] = await Promise.all([
         userRes.json(),
