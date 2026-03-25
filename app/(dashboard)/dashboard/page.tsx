@@ -1,6 +1,7 @@
 import { RepoGrid } from "@/components/RepoGrid";
 import Image from "next/image";
 import { ActivityFeed } from "@/components/ActivityFeed";
+import { ContributionChart } from "@/components/ContributionChart";
 
 export default async function DashboardPage() {
     const headers = {
@@ -56,22 +57,15 @@ export default async function DashboardPage() {
                         <p className="mt-3 text-sm">{user.bio}</p>
                     )}
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
+                    <div className="grid grid-cols-3 gap-4 mt-6">
                         <div className="text-center">
                             <p className="font-semibold">{user.public_repos}</p>
                             <p className="text-xs text-muted-foreground">Repos</p>
                         </div>
-
-                        <div className="text-center">
-                            <p className="font-semibold">{user.public_gists}</p>
-                            <p className="text-xs text-muted-foreground">Gists</p>
-                        </div>
-
                         <div className="text-center">
                             <p className="font-semibold">{user.followers}</p>
                             <p className="text-xs text-muted-foreground">Followers</p>
                         </div>
-
                         <div className="text-center">
                             <p className="font-semibold">{user.following}</p>
                             <p className="text-xs text-muted-foreground">Following</p>
@@ -93,14 +87,7 @@ export default async function DashboardPage() {
                 <div>
                     <h2 className="text-xl font-semibold mb-4">Contributions</h2>
                     <div className="border rounded-xl p-4 shadow-sm overflow-x-auto">
-                        <Image
-                            src={`https://ghchart.rshah.org/${username}`}
-                            alt={`${username}'s contribution chart`}
-                            width={800}
-                            height={200}
-                            className="w-full h-auto"
-                            unoptimized
-                        />
+                        <ContributionChart username={user.login} />
                     </div>
                 </div>
 

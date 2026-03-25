@@ -1,19 +1,21 @@
 import { signOut } from "@/auth"
-import { Button } from "@/components/ui/button"
+import { LogOut } from "lucide-react"
 
 export default function SignOut() {
     return (
-        <>
-            <form
-                action={async () => {
-                    "use server"
-                    await signOut({ redirectTo: "/login" })
-                }}
+        <form
+            action={async () => {
+                "use server"
+                await signOut({ redirectTo: "/" })
+            }}
+        >
+            <button
+                type="submit"
+                className="flex items-center gap-2 w-full px-0.5 py-1.5 text-sm rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
             >
-                <Button variant="outline" type="submit" className="w-full">
-                    Sign Out
-                </Button>
-            </form>
-        </>
+                <LogOut className="w-4 h-4 shrink-0" />
+                <span>Sign Out</span>
+            </button>
+        </form>
     )
 }

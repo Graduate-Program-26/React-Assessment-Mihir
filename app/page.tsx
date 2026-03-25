@@ -1,13 +1,10 @@
-import { Suspense } from "react";
-import { SearchBar } from "@/components/SearchBar";
-import { SearchBarSkeleton } from "@/components/SearchBarSkeleton";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import { LandingHero } from "@/components/LandingHero";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col items-center w-full pt-6">
-      <Suspense fallback={<SearchBarSkeleton />}>
-        <SearchBar />
-      </Suspense>
-    </div>
-  );
+export default async function Home() {
+  const session = await auth();
+  if (session) redirect("/landing");
+
+  return <LandingHero />;
 }

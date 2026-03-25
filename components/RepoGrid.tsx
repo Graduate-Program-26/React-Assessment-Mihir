@@ -7,6 +7,7 @@ interface Repo {
     html_url: string;
     stargazers_count: number;
     language: string;
+    updated_at: string;
 }
 
 export function RepoGrid({ repos }: { repos: Repo[] }) {
