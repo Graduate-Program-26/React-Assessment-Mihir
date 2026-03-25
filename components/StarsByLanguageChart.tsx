@@ -21,7 +21,10 @@ export function StarsByLanguageChart({ languages }: { languages: LanguageStat[] 
                     <XAxis
                         type="number"
                         tickFormatter={fmtStars}
-                        tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+                        tick={{
+                            fontSize: 11, fill: getComputedStyle(document.documentElement)
+                                .getPropertyValue('--muted-foreground') || '#9ca3af'
+                        }}
                         axisLine={false}
                         tickLine={false}
                     />
@@ -29,7 +32,10 @@ export function StarsByLanguageChart({ languages }: { languages: LanguageStat[] 
                         type="category"
                         dataKey="language"
                         width={72}
-                        tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+                        tick={{
+                            fontSize: 11, fill: getComputedStyle(document.documentElement)
+                                .getPropertyValue('--muted-foreground') || '#9ca3af'
+                        }}
                         axisLine={false}
                         tickLine={false}
                     />
