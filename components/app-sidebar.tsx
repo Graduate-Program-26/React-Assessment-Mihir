@@ -125,31 +125,6 @@ export async function AppSidebar() {
             </SidebarContent>
 
             {githubUser && (
-                <SidebarGroup>
-                    <SidebarGroupLabel>My Stats</SidebarGroupLabel>
-                    <SidebarGroupContent>
-                        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border">
-                            {[
-                                { label: "Total Stars", value: totalStars, icon: Star },
-                                { label: "Total Forks", value: totalForks, icon: GitFork },
-                                { label: "Followers", value: githubUser.followers, icon: Users },
-                                { label: "Public Repos", value: githubUser.public_repos, icon: LayoutDashboard },
-                            ].map(({ label, value, icon: Icon }) => (
-                                <div key={label} className="flex items-center justify-between px-4 py-3.5">
-                                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                                        <Icon className="w-4 h-4 shrink-0" />
-                                        <span>{label}</span>
-                                    </div>
-                                    <span className="text-sm font-semibold">{value}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            )}
-
-
-            {githubUser && (
                 <SidebarFooter className="p-3">
                     <Link
                         href={`/users/${githubUser.login}`}
