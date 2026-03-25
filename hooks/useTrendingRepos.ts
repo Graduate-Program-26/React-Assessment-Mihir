@@ -31,8 +31,9 @@ async function fetchTrendingRepos(language: string, since: number) {
     const date = new Date();
     date.setDate(date.getDate() - since);
     const dateStr = date.toISOString().split("T")[0];
-    //language filter to be handled here eventually
-    const url = `https://api.github.com/search/repositories?q=created:>${dateStr}&sort=stars&order=desc&per_page=24`;
+
+    const langFilter = language !== "All" ? `+language:${language}` : "";
+    const url = `https://api.github.com/search/repositories?q=created:>${dateStr}${langFilter}&sort=stars&order=desc&per_page=24`;
 
     const res = await fetch(url);
     if (!res.ok) throw new Error("Failed to fetch trending repos");

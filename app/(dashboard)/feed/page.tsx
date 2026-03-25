@@ -31,8 +31,8 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
 }
 
 export default function FeedPage() {
-    const [language, setLanguage] = useState("All"); // will use later for filtering
-    const [since, setSince] = useState(7); // will also use this later for filtering
+    const [language, setLanguage] = useState("All");
+    const [since, setSince] = useState(7);
     const { data, isLoading, isError, error } = useTrendingRepos(language, since);
 
     return (
