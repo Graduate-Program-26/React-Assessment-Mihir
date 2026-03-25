@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -11,17 +11,17 @@ interface RecentUser {
 }
 
 const STORAGE_KEY = "recent_searches";
-const MAX_ITEMS = 5;
 
 export function RecentSearches() {
-    const [users, setUsers] = useState<RecentUser[]>([]);
-
-    useEffect(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            setUsers(JSON.parse(stored));
+    const [users, setUsers] = useState<RecentUser[]>(() => {
+        if (typeof window === "undefined") return [];
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? (JSON.parse(stored) as RecentUser[]) : [];
+        } catch {
+            return [];
         }
-    }, []);
+    });
 
     function removeUser(login: string) {
         const updated = users.filter((u) => u.login !== login);

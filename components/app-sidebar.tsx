@@ -12,7 +12,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./ModeToggle";
-import { LayoutDashboard, Search, Star, GitFork, Users } from "lucide-react";
+import { LayoutDashboard, Search } from "lucide-react";
 import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
@@ -34,37 +34,21 @@ interface GitHubUser {
     public_gists: number;
 }
 
-interface GitHubRepo {
-    stargazers_count: number;
-    forks_count: number;
-}
-
 export async function AppSidebar() {
     const session = await auth();
     const username = session?.user?.name;
 
     let githubUser: GitHubUser | null = null;
-    let totalStars = 0;
-    let totalForks = 0;
 
     if (username) {
-        const [userRes, reposRes] = await Promise.all([
+        const [userRes] = await Promise.all([
             fetch(`https://api.github.com/users/${username}`, {
-                headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
-                next: { revalidate: 3600 },
-            }),
-            fetch(`https://api.github.com/users/${username}/repos?per_page=100`, {
                 headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
                 next: { revalidate: 3600 },
             }),
         ]);
 
         if (userRes.ok) githubUser = await userRes.json();
-        if (reposRes.ok) {
-            const repos: GitHubRepo[] = await reposRes.json();
-            totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
-            totalForks = repos.reduce((sum, r) => sum + r.forks_count, 0);
-        }
     }
 
     return (

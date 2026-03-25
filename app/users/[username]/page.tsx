@@ -10,7 +10,7 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { BackButton } from "@/components/BackButton";
-import { GitHubCalendar } from 'react-github-calendar';
+import { ContributionChart } from "@/components/ContributionChart";
 
 interface PageProps {
     params: Promise<{
@@ -113,7 +113,7 @@ export default async function UserProfilePage({ params }: PageProps) {
                 <div>
                     <h2 className="text-xl font-semibold mb-4">Contributions</h2>
                     <div className="border rounded-xl p-4 shadow-sm overflow-x-auto">
-                        <GitHubCalendar username={user.login} />
+                        <ContributionChart username={user.login} />
                     </div>
                 </div>
 
