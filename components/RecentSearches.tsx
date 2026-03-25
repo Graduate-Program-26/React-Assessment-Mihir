@@ -38,7 +38,7 @@ export function RecentSearches() {
     }
 
     return (
-        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border">
+        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border" suppressHydrationWarning>
             {users.map((user) => (
                 <div
                     key={user.login}
