@@ -18,9 +18,11 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { RecentSearches } from "./RecentSearches";
+import { LuChartNoAxesCombined } from "react-icons/lu";
 
 const navItems = [
     { label: "Search", href: "/landing", icon: Search },
+    { label: "Trending Repos", href: "/trending", icon: LuChartNoAxesCombined },
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
 ];
 
