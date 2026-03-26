@@ -9,6 +9,8 @@ https://react-assessment-mihir.vercel.app
 - [Installation](#installation)  
 - [App Overview](#app-overview)
 - [Lighthouse Performance](#lighthouse-performance)
+- [Conclusion](#conclusion)
+- [Resources](#resources)
 
 ---
 
@@ -117,3 +119,74 @@ Below you can see the lighthouse performance scores. The overall performance is 
 ## Conclusion
 This concludes the readme of my application but just remember that you can view it for free at the following URL and test it out for yourself:  
 https://react-assessment-mihir.vercel.app
+
+Resources
+
+The following resources were consulted in order to build this project that were provided from the spec:
+- https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/-creating-an-oauth-app
+- https://authjs.dev/getting-started/providers/github
+- https://docs.github.com/en/rest/users
+- https://docs.github.com/en/rest/repos/repos
+- https://docs.github.com/en/rest/activity/events
+- https://nextjs.org/docs/app/building-your-application/authentication
+- https://vercel.com/docs/deployments
+- https://dribbble.com/shots/4355037-Github-Redesign
+- https://contributions.taminomartinius.de/
+
+**Next.js**
+- App Router docs — https://nextjs.org/docs/app
+- Server Components — https://nextjs.org/docs/app/building-your-application-rendering/server-components
+- Dynamic Routes — https://nextjs.org/docs/app/building-your-application/- routing/dynamic-routes
+- useSearchParams — https://nextjs.org/docs/app/api-reference/functions/use-search-params
+- cookies — https://nextjs.org/docs/app/api-reference/functions/cookies
+- redirect — https://nextjs.org/docs/app/api-reference/functions/redirect
+- loading.tsx — https://nextjs.org/docs/app/api-reference/file-conventions/loading
+- not-found.tsx — https://nextjs.org/docs/app/api-reference/file-conventions/not-found
+- Hydration errors — https://nextjs.org/docs/messages/react-hydration-error
+- Next.js Image — https://nextjs.org/docs/app/api-reference/components/image
+- NextAuth / Auth.js
+- Getting started — https://authjs.dev/getting-started
+- Installation (Next.js) — https://authjs.dev/getting-started/installation?framework=next-js
+- GitHub provider — https://authjs.dev/getting-started/providers/github
+- Session callbacks — https://authjs.dev/guides/extending-the-session
+- Error reference (UntrustedHost) — https://errors.authjs.dev#untrustedhost
+
+**GitHub API & OAuth**
+- OAuth Apps — https://docs.github.com/en/apps/oauth-apps
+- Creating an OAuth app — https://docs.github.com/en/apps/oauth-apps/- building-oauth-apps/creating-an-oauth-app
+- Authorizing OAuth apps — https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+- OAuth scopes — https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps
+- REST API users — https://docs.github.com/en/rest/users/users
+- REST API repos — https://docs.github.com/en/rest/repos/repos
+- REST API events — https://docs.github.com/en/rest/activity/events
+- GraphQL API — https://docs.github.com/en/graphql
+- GraphQL contributions — https://docs.github.com/en/graphql/reference/objects#contributionscollection
+
+**shadcn/ui**
+- Installation — https://ui.shadcn.com/docs/installation
+- Charts — https://ui.shadcn.com/docs/components/chart
+- Breadcrumb — https://ui.shadcn.com/docs/components/breadcrumb
+- Sidebar — https://ui.shadcn.com/docs/components/sidebar
+- Skeleton — https://ui.shadcn.com/docs/components/skeleton
+- Card — https://ui.shadcn.com/docs/components/card
+
+**Charts**
+- Recharts — https://recharts.org/en-US
+
+**TanStack Query**
+- Overview — https://tanstack.com/query/latest/docs/framework/react/overview
+- useQuery — https://tanstack.com/query/latest/docs/framework/react/reference/useQuery
+
+**React**
+- useState lazy initializer — https://react.dev/reference/react/useState#avoiding-recreating-the-initial-state
+- useEffect — https://react.dev/reference/react/useEffect
+- Suspense — https://react.dev/reference/react/Suspense
+- Libraries
+- react-github-calendar — https://grubersjoe.github.io/react-github-calendar
+- react-tooltip — https://react-tooltip.com
+- next-themes — https://github.com/pacocoursey/next-themes
+- lucide-react — https://lucide.dev
+- react-icons — https://react-icons.github.io/react-icons
+
+**Illustrations**
+- unDraw — https://undraw.co/illustrations
