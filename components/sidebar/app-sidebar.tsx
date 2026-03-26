@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "../themes/ModeToggle";
 import { LayoutDashboard, Search } from "lucide-react";
 import Link from "next/link";
 import { auth } from "@/auth";

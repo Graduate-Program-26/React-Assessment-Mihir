@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useTrendingRepos } from "@/hooks/useTrendingRepos";
 import { IoMdTrendingUp, IoMdStats } from "react-icons/io";
-import RepoCardSkeleton from "@/components/RepoCardSkeleton";
+import RepoCardSkeleton from "@/components/skeletons/RepoCardSkeleton";
 import { cn } from "@/app/lib/utils";
-import { FeedRepoCard } from "@/components/FeedRepoCard";
-import { TrendingInsights } from "@/components/TrendingInsights";
+import { FeedRepoCard } from "@/components/trends/FeedRepoCard";
+import { TrendingInsights } from "@/components/trends/TrendingInsights";
 
 const LANGUAGES = ["All", "TypeScript", "Python", "Rust", "Go", "JavaScript", "C++", "Zig", "Swift", "Kotlin"];
 const TIME_RANGES = [
