@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ActivityFeed } from "@/components/profile/ActivityFeed";
 import { ContributionChart } from "@/components/profile/ContributionChart";
 import { Metadata } from "next";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
     title: `Personal GitHub profile page`,
@@ -10,11 +11,19 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPage() {
+    const session = await auth();
+
+    if (!session?.user?.name) {
+        return <div>Not authenticated</div>;
+    }
+
+    const username = session.user.name;
+
     const headers = {
         Authorization: `token ${process.env.GITHUB_TOKEN}`,
     };
 
-    const userRes = await fetch("https://api.github.com/user", {
+    const userRes = await fetch(`https://api.github.com/users/${username}`, {
         headers,
         cache: "no-store",
     });
@@ -22,7 +31,6 @@ export default async function DashboardPage() {
     if (!userRes.ok) return <div>Failed to load user</div>;
 
     const user = await userRes.json();
-    const username = user.login;
 
     const [repoRes, activitiesRes] = await Promise.all([
         fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, {
