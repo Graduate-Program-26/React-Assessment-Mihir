@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://react-assessment-mihir-2gi9736oz-mihir-arjun-dvts-projects.vercel.app
