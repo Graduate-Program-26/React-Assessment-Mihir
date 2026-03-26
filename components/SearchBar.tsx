@@ -8,24 +8,28 @@ import { UserGrid } from "./UserGrid";
 import { UserGridSkeleton } from "./UserGridSkeleton";
 import { Search } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export function SearchBar() {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const query = searchParams.get("q") ?? "";
-    const debouncedQuery = useDebounce(query, 500);
-    const { data, isLoading, isError, error } = useSearchUsers(debouncedQuery);
+    const [inputValue, setInputValue] = useState(searchParams.get("q") ?? "");
+    const debouncedValue = useDebounce(inputValue, 500);
+    const { data, isLoading, isError, error } = useSearchUsers(debouncedValue);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+    useEffect(() => {
         const params = new URLSearchParams(searchParams.toString());
-        if (value) {
-            params.set("q", value);
+        if (debouncedValue) {
+            params.set("q", debouncedValue);
         } else {
             params.delete("q");
         }
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }, [debouncedValue]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
     };
 
     return (
@@ -37,13 +41,13 @@ export function SearchBar() {
                         type="search"
                         placeholder="Search GitHub users..."
                         className="w-full pl-9"
-                        value={query}
+                        value={inputValue}
                         onChange={handleChange}
                     />
                 </div>
             </div>
 
-            {!query && (
+            {!inputValue && (
                 <div className="flex flex-col items-center gap-3 mt-6">
                     <Image
                         src="/illustrations/Search-engines-bro.svg"
@@ -58,15 +62,15 @@ export function SearchBar() {
                 </div>
             )}
 
-            {query && isLoading && <UserGridSkeleton />}
+            {inputValue && isLoading && <UserGridSkeleton />}
 
-            {query && isError && (
+            {inputValue && isError && (
                 <p className="text-red-500">
                     {(error as Error).message}
                 </p>
             )}
 
-            {query && !isLoading && data && data.items.length === 0 && (
+            {inputValue && !isLoading && data && data.items.length === 0 && (
                 <div className="flex flex-col items-center gap-3 mt-6">
                     <Image
                         src="/illustrations/undraw_page-eaten_b2rt.svg"
@@ -76,12 +80,12 @@ export function SearchBar() {
                     />
                     <p className="text-lg font-semibold text-foreground">No users found</p>
                     <p className="text-sm text-muted-foreground max-w-xs text-center">
-                        We couldn&#39;t find anyone matching <span className="font-medium text-foreground">&quot;{query}&quot;</span>. Try checking the spelling or searching for a different username.
+                        We couldn&#39;t find anyone matching with that username. Try checking the spelling or searching for a different username.
                     </p>
                 </div>
             )}
 
-            {query && !isLoading && data && data.items.length > 0 && <UserGrid users={data.items} />}
+            {inputValue && !isLoading && data && data.items.length > 0 && <UserGrid users={data.items} />}
         </div>
     );
 }
