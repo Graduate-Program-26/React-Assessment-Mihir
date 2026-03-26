@@ -1,7 +1,7 @@
-import { RepoGrid } from "@/components/RepoGrid";
+import { RepoGrid } from "@/components/profile/RepoGrid";
 import Image from "next/image";
-import { ActivityFeed } from "@/components/ActivityFeed";
-import { ContributionChart } from "@/components/ContributionChart";
+import { ActivityFeed } from "@/components/profile/ActivityFeed";
+import { ContributionChart } from "@/components/profile/ContributionChart";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

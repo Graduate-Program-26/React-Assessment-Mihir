@@ -1,6 +1,6 @@
-import { RepoGrid } from "@/components/RepoGrid";
+import { RepoGrid } from "@/components/profile/RepoGrid";
 import Image from "next/image";
-import { ActivityFeed } from "@/components/ActivityFeed";
+import { ActivityFeed } from "@/components/profile/ActivityFeed";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -9,8 +9,8 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { BackButton } from "@/components/BackButton";
-import { ContributionChart } from "@/components/ContributionChart";
+import { BackButton } from "@/components/profile/BackButton";
+import { ContributionChart } from "@/components/profile/ContributionChart";
 import NotFoundPage from "@/app/not-found";
 import { Metadata } from "next";
 

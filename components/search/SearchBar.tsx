@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useSearchUsers } from "@/hooks/useSearchUsers";
 import { useDebounce } from "@/hooks/useDebounce";
 import { UserGrid } from "./UserGrid";
-import { UserGridSkeleton } from "./UserGridSkeleton";
+import { UserGridSkeleton } from "../skeletons/UserGridSkeleton";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";

@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { LandingHero } from "@/components/LandingHero";
+import { LandingHero } from "@/components/landing/LandingHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
