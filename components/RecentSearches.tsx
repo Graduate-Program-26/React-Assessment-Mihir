@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -13,24 +13,22 @@ interface RecentUser {
 const STORAGE_KEY = "recent_searches";
 
 export function RecentSearches() {
-
-    const [users, setUsers] = useState<RecentUser[]>(() => {
-        if (typeof window === "undefined") return [];
-        try {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? (JSON.parse(stored) as RecentUser[]) : [];
-        } catch {
-            return [];
-        }
-    });
-
-    const [mounted, setMounted] = useState(false);
+    const [users, setUsers] = useState<RecentUser[]>([]);
+    const loaded = useRef(false);
 
     useEffect(() => {
-        setMounted(true);
+        if (loaded.current) return;
+        loaded.current = true;
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored) as RecentUser[];
+                setTimeout(() => setUsers(parsed), 0);
+            }
+        } catch {
+            // do nothing
+        }
     }, []);
-
-    if (!mounted) return null;
 
     function removeUser(login: string) {
         const updated = users.filter((u) => u.login !== login);
@@ -47,7 +45,7 @@ export function RecentSearches() {
     }
 
     return (
-        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border" suppressHydrationWarning>
+        <div className="mx-1 rounded-lg border border-border bg-muted/40 divide-y divide-border">
             {users.map((user) => (
                 <div
                     key={user.login}

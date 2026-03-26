@@ -26,7 +26,7 @@ export function SearchBar() {
             params.delete("q");
         }
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }, [debouncedValue]);
+    }, [debouncedValue, pathname, router, searchParams]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);

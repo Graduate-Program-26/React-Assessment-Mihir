@@ -13,7 +13,6 @@ import { BackButton } from "@/components/BackButton";
 import { ContributionChart } from "@/components/ContributionChart";
 import NotFoundPage from "@/app/not-found";
 import { Metadata } from "next";
-import { use } from "react";
 
 interface PageProps {
     params: Promise<{
