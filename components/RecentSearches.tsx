@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
@@ -13,6 +13,7 @@ interface RecentUser {
 const STORAGE_KEY = "recent_searches";
 
 export function RecentSearches() {
+
     const [users, setUsers] = useState<RecentUser[]>(() => {
         if (typeof window === "undefined") return [];
         try {
@@ -22,6 +23,14 @@ export function RecentSearches() {
             return [];
         }
     });
+
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     function removeUser(login: string) {
         const updated = users.filter((u) => u.login !== login);
