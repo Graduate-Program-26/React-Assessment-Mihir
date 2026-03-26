@@ -12,26 +12,21 @@ export const metadata: Metadata = {
 
 export default async function DashboardPage() {
     const session = await auth();
+    const username = session?.user?.name;
 
-    if (!session?.accessToken) {
+    if (!username) {
         return <div>Not authenticated</div>;
     }
 
     const headers = {
-        Authorization: `Bearer ${session.accessToken}`,
+        Authorization: `token ${process.env.GITHUB_TOKEN}`,
     };
 
-    const userRes = await fetch("https://api.github.com/user", {
-        headers,
-        cache: "no-store",
-    });
-
-    if (!userRes.ok) return <div>Failed to load user</div>;
-
-    const user = await userRes.json();
-    const username = user.login;
-
-    const [repoRes, activitiesRes] = await Promise.all([
+    const [userRes, repoRes, activitiesRes] = await Promise.all([
+        fetch(`https://api.github.com/users/${username}`, {
+            headers,
+            cache: "no-store",
+        }),
         fetch(`https://api.github.com/users/${username}/repos?sort=stars&per_page=6`, {
             headers,
             cache: "no-store",
@@ -42,7 +37,10 @@ export default async function DashboardPage() {
         }),
     ]);
 
-    const [repos, activities] = await Promise.all([
+    if (!userRes.ok) return <div>User not found</div>;
+
+    const [user, repos, activities] = await Promise.all([
+        userRes.json(),
         repoRes.json(),
         activitiesRes.json(),
     ]);
