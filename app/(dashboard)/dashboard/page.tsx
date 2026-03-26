@@ -2,6 +2,12 @@ import { RepoGrid } from "@/components/RepoGrid";
 import Image from "next/image";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { ContributionChart } from "@/components/ContributionChart";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: `Personal GitHub profile page`,
+    description: `This is your personal GitHub profile page`,
+}
 
 export default async function DashboardPage() {
     const headers = {

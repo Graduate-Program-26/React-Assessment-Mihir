@@ -7,6 +7,12 @@ import RepoCardSkeleton from "@/components/RepoCardSkeleton";
 import { cn } from "@/app/lib/utils";
 import { FeedRepoCard } from "@/components/FeedRepoCard";
 import { TrendingInsights } from "@/components/TrendingInsights";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: `Trending Repositories Page`,
+    description: `This is the trending repositories page where you can see what is trending on GitHub as well as inisghts that are visualised through charts`,
+}
 
 const LANGUAGES = ["All", "TypeScript", "Python", "Rust", "Go", "JavaScript", "C++", "Zig", "Swift", "Kotlin"];
 const TIME_RANGES = [
