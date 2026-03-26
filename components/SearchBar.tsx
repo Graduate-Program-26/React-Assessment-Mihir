@@ -19,6 +19,9 @@ export function SearchBar() {
     const { data, isLoading, isError, error } = useSearchUsers(debouncedValue);
 
     useEffect(() => {
+        const currentQuery = searchParams.get("q") ?? "";
+        if (debouncedValue === currentQuery) return;
+
         const params = new URLSearchParams(searchParams.toString());
         if (debouncedValue) {
             params.set("q", debouncedValue);
@@ -26,7 +29,7 @@ export function SearchBar() {
             params.delete("q");
         }
         router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }, [debouncedValue, pathname, router, searchParams]);
+    }, [debouncedValue, pathname]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
