@@ -19,7 +19,7 @@ export default async function DashboardPage() {
     }
 
     const headers = {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${session?.accessToken}`,
     };
 
     const [userRes, repoRes, activitiesRes] = await Promise.all([
