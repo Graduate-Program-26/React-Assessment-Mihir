@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://yourdomain.com/sitemap.xml',
+        sitemap: 'https://react-assessment-mihir-2gi9736oz-mihir-arjun-dvts-projects.vercel.app',
     }
 }
