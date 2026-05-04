@@ -8,7 +8,7 @@ import { cn } from "@/app/lib/utils";
 import { FeedRepoCard } from "@/components/trends/FeedRepoCard";
 import { TrendingInsights } from "@/components/trends/TrendingInsights";
 
-const LANGUAGES = ["All", "TypeScript", "Python", "Rust", "Go", "JavaScript", "C++", "Zig", "Swift", "Kotlin"];
+const LANGUAGES = ["All", "TypeScript", "Python", "Rust", "Go", "JavaScript", "C++", "Swift", "Kotlin"];
 const TIME_RANGES = [
     { label: "Today", value: 1 },
     { label: "This week", value: 7 },
@@ -107,7 +107,16 @@ export default function FeedPage() {
             )}
 
             {activeTab === "insights" && data && !isLoading && (
-                <TrendingInsights repos={data.items} />
+                <div className="flex flex-col items-center gap-3 w-full">
+                    <div className="flex flex-wrap justify-center gap-1.5">
+                        {TIME_RANGES.map((r) => (
+                            <FilterPill key={r.value} active={since === r.value} onClick={() => setSince(r.value)}>
+                                {r.label}
+                            </FilterPill>
+                        ))}
+                    </div>
+                    <TrendingInsights repos={data.items} />
+                </div>
             )}
         </div>
     );

@@ -1,5 +1,5 @@
 # GitHub Portfolio App
-The screening process for reviewing a prospective employee can be long and arduous. This project aims to simplify the process of reviewing GitHub Portfolios and also looking at current and emerging tredns when it comes to the latest repositories. This project was built using React, Nextjs and ShadCn. It freely available at the following site:  
+The screening process for reviewing a prospective employee can be a long and arduous task. This project aims to simplify the process of reviewing GitHub Portfolios and also looking at current and emerging trends when it comes to the latest repositories. This project was built using React, Nextjs, Tanstack Query and ShadCn. It is freely available at the following site:  
 https://react-assessment-mihir.vercel.app
 
 ---
